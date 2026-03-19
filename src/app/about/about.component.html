@@ -1,0 +1,52 @@
+<p>about works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div class="mb-3">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <div *ngIf="form.get('name')?.touched">
+         <div *ngIf="form.get('name')?.errors?.['required']" class="text-danger">
+            Name is required
+        </div>
+        <div *ngIf="form.get('name')?.errors?.['pattern']" class="text-danger">
+            Only alphabets allowed
+        </div>
+    </div>
+
+  </div>
+
+  <div class="mb-3">
+    <label>Department</label>
+    <input type="text" class="form-control" formControlName="department">
+    <div *ngIf="form.get('department')?.touched">
+         <div *ngIf="form.get('department')?.errors?.['required']" class="text-danger">
+            Department is required
+        </div>
+        <div *ngIf="form.get('department')?.errors?.['pattern']" class="text-danger">
+            Only alphabets allowed
+        </div>
+    </div>
+
+  </div>
+
+  <div class="mb-3">
+    <label>Roll Number</label>
+    <input type="text" class="form-control" formControlName="rollNumber">
+     <div *ngIf="form.get('rollNumber')?.touched">
+         <div *ngIf="form.get('rollNumber')?.errors?.['required']" class="text-danger">
+            Roll Number is required
+        </div>
+        <div *ngIf="form.get('rollNumber')?.errors?.['pattern']" class="text-danger">
+            Only numbers allowed
+        </div>
+    </div>
+
+  </div>
+
+<button class="btn btn-primary">
+  {{ selectedStudentId ? 'Update' : 'Submit' }}
+</button>
+</form>
+<br>
+<button class="btn btn-primary mb-3" (click)="home()">Back</button>

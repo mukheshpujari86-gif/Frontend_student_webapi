@@ -1,0 +1,36 @@
+<br>
+<button class="btn btn-primary mb-3" (click)="about()">Add</button>
+<!-- 🔄 Loading -->
+<div *ngIf="isLoading" class="text-center mt-3">
+  <div class="spinner-border text-primary"></div>
+</div>
+<table class="table table-bordered text-center mt-3" *ngIf="!isLoading && students.length > 0">
+  <thead>
+    <tr>
+        <th>SR No</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Roll Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- <tr *ngFor="let student of students; "> -->
+     <tr *ngFor="let student of students; let i = index"> 
+        <td>{{i+1}}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.department }}</td>
+      <td>{{ student.rollNumber }}</td>
+      <td>
+         <!-- <button class="btn btn-warning btn-sm" (click)="editStudent(student.id)">Edit</button> -->
+        <!-- <button class="btn btn-danger btn-sm" (click)="deleteStudents(student.id)">Delete</button> -->
+         <button class="btn btn-primary btn-sm"
+        (click)="editStudent(student)">
+  Update
+</button>	&nbsp;
+          <button  class="btn btn-danger btn-sm" (click)="deleteStudents(student.id, i)"> Delete </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
