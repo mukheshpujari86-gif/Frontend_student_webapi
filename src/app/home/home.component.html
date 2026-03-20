@@ -19,7 +19,7 @@
     <!-- <tr *ngFor="let student of students; "> -->
      <tr *ngFor="let student of students; let i = index"> 
         <td>{{i+1}}</td>
-      <td>{{ student.name }}</td>
+      <td>{{ student.name | lowercase }}</td>  <!--pipe -->
       <td>{{ student.department }}</td>
       <td>{{ student.rollNumber }}</td>
       <td>
