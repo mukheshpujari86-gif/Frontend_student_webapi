@@ -34,3 +34,15 @@
     </tr>
   </tbody>
 </table>
+<div class="text-center">
+<button class="btn btn-primary mb-3" (click)="previousPage()" [disabled]="currentPage === 1">
+  Previous
+</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<span>Page {{ currentPage }}</span>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary mb-3" (click)="nextPage()" 
+        [disabled]="currentPage * pageSize >= totalRecords">
+  Next
+</button>
+</div>

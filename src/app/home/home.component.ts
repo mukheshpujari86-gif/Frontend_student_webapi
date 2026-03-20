@@ -16,6 +16,21 @@ export class HomeComponent implements OnInit {
     students:any[]=[];
     isLoading = true;
 
+    //pagenation
+    
+    currentPage: number = 1;
+    pageSize: number = 10;
+    totalRecords: number = 0;
+ 
+
+  //pagination
+
+  //sort
+     allStudents: any[] = [];
+    sortField: string = 'name';
+    sortDirection: string = 'asc'; // asc / desc
+
+  //sort
    ngOnInit(): void {
      this.getStudents();
    }
@@ -26,9 +41,29 @@ export class HomeComponent implements OnInit {
 
    getStudents():void{
     this.isLoading = true;
-    this.API.getServiceStudent().subscribe(
-         (data) => {
-        this.students=data
+    // this.API.getServiceStudent().subscribe(
+    //      (data) => {
+    //     this.students=data
+        
+
+    //pAGINtion
+    this.API.getServiceStudent().subscribe((data) => {
+    this.allStudents = data;           // store full data
+    this.totalRecords = data.length;   // total count
+
+    this.applySorting();               // apply sort
+    this.applyPagination();            // apply pagination
+    //PAGINATION
+    
+        //sort
+        
+        // this.allStudents =data.sort((a:any,b:any)=>
+        //   a.name.localeCompare(b.name)  || 
+        //   a.department.localeCompare(b.department)
+        // );
+
+        //sort
+
         this.isLoading = false;
     });
 
@@ -62,6 +97,42 @@ export class HomeComponent implements OnInit {
     //   })
    
     }
+
+    // sort
+
+    applySorting() {
+    this.allStudents.sort((a: any, b: any) => 
+      a.name.localeCompare(b.name) 
+
+    );
+  }
+
+  //sort
+
+    //pagination logic
+
+    applyPagination() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+
+      this.students = this.allStudents.slice(startIndex, endIndex);
+    }
+
+nextPage() {
+  if (this.currentPage * this.pageSize < this.totalRecords) {
+    this.currentPage++;
+    this.applyPagination();
+  }
+}
+
+previousPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.applyPagination();
+  }
+}
+
+  //pagination logic
 
     deleteStudents(id: number,index: number): void {
     if (confirm('Are you sure you want to delete this region?')) {
